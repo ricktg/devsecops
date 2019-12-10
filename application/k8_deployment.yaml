@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: simple-k8-app-deployment
+spec:
+  selector:
+    matchLabels:
+      app: simple-k8-app
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 25%
+  template:
+    metadata:
+      labels:
+        app: simple-k8-app
+    spec:
+      containers:
+        - name: simple-k8-app
+          image: simple-k8-app:latest
+          imagePullPolicy: Never
+          resources:
+            requests:
+              memory: "200Mi"
+              cpu: "200m"
+            limits:
+              memory: "200Mi"
+              cpu: "200m"
+          ports:
+            - containerPort: 6000
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 6000
+            initialDelaySeconds: 5
+            periodSeconds: 2
+            successThreshold: 2
+      terminationGracePeriodSeconds: 60

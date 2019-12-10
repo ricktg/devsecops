@@ -1,0 +1,14 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: simple-k8-app-ingress
+  labels:
+    app: simple-k8-app
+spec:
+  rules:
+    - http:
+        paths:
+          - path:
+            backend:
+              serviceName: simple-k8-app
+              servicePort: 6000
