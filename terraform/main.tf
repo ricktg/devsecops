@@ -67,7 +67,7 @@ resource "aws_route_table_association" "k8-subnet-association" {
 // SECURITY GROUP
 resource "aws_security_group" "k8-sg" {
   name        = "my-simple-k8-ec2-sg"
-  description = "Eureka Service Security Group"
+  description = "Simple K8s Security Group"
   vpc_id      = data.aws_vpc.default.id
 
   ingress {
@@ -75,13 +75,6 @@ resource "aws_security_group" "k8-sg" {
     protocol        = "tcp"
     to_port         = 80
     cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  ingress {
-    from_port       = 22
-    protocol        = "tcp"
-    to_port         = 22
-    cidr_blocks = ["159.220.58.2/32"]
   }
 
   egress {
