@@ -9,4 +9,5 @@ Criação de um Cluster Kubernetes single node MINIMALISTA
 # Uso
 
 No diretório terraform, rodar:
+
     terraform apply
